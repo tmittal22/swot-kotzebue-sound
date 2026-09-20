@@ -10,3 +10,8 @@ __pycache__/
 deck/slide-*.jpg
 deck/*.pdf
 deck/*.txt
+deck/wt-*.jpg
+data/aux/harp/
+data/aux/*.gdb.zip
+data/swot/cache_lake/
+data/swot/cache_sos/
