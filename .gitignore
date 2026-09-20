@@ -1,0 +1,9 @@
+# Large downloaded inputs -- all regenerable via src/fetch_*.py
+data/aux/*.nc
+data/aux/*.zip
+data/swot/cache/
+data/swot/*.parquet
+data/ocean/*.nc
+data/gauges/*.parquet
+__pycache__/
+*.pyc
