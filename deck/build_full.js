@@ -220,6 +220,47 @@ body(s,'The practical trade: Version D runs to Sep 2026 and is the backbone here
 body(s,'The official v17b→v16 reach translation table maps all 162 domain reaches, which is '+
  'what makes this comparison possible at all.',9.3,4.9,3.5,1.1,11,MUTED);
 
+
+/* ============ SWORD versions and resolution ============ */
+s=light('SWORD: which version, and at what resolution','Data versions');
+body(s,'SWORD is the river database SWOT is defined on. Every reach and node ID in this '+
+ 'project comes from it, so its version and resolution set the ceiling on everything else.',
+ 0.55,1.35,12.2,0.5,13);
+s.addText('Resolution tiers',{x:0.55,y:1.82,w:6.0,h:0.32,fontFace:HF,fontSize:14,
+  bold:true,color:INK,margin:0});
+s.addTable([[
+ {text:'layer',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'spacing',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'count (N. America)',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'carries SWOT data?',options:{bold:true,color:WHITE,fill:{color:INK}}}],
+ [{text:'centrelines'},{text:'~32 m',options:{bold:true}},{text:'10,349,756'},
+  {text:'NO — geometry only',options:{color:RED}}],
+ [{text:'nodes'},{text:'~199 m'},{text:'1,705,705'},{text:'yes — used here'}],
+ [{text:'reaches'},{text:'~10.1 km'},{text:'38,696'},{text:'yes — used here'}]],
+ {x:0.55,y:2.16,w:12.2,colW:[2.4,2.4,3.4,4.0],fontFace:BF,fontSize:11,color:'20303C',
+  border:{pt:0.5,color:'C9D8E2'},rowH:0.36,valign:'middle'});
+body(s,'The highest-resolution SWORD layer is the 32 m centreline — but it is geometry, not '+
+ 'measurement. SWOT’s vector product delivers water-surface elevation at node (200 m) and '+
+ 'reach (10 km) scale only. For metre-scale WSE you need L2_HR_PIXC (10-60 m pixel cloud), '+
+ 'which requires an Earthdata Login and is not used here.',0.55,3.65,12.2,0.85,11.5,TEAL);
+s.addText('Version lineage',{x:0.55,y:4.62,w:6.0,h:0.32,fontFace:HF,fontSize:14,
+  bold:true,color:INK,margin:0});
+s.addTable([[
+ {text:'SWORD',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'released',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'paired SWOT product',options:{bold:true,color:WHITE,fill:{color:INK}}},
+ {text:'role here',options:{bold:true,color:WHITE,fill:{color:INK}}}],
+ [{text:'v16'},{text:'Aug 2023'},{text:'RiverSP Version 2.0 + L4 SoS'},{text:'discharge only'}],
+ [{text:'v17b'},{text:'2025'},{text:'RiverSP Version D (current)'},{text:'the observations'}],
+ [{text:'v17c',options:{bold:true,color:GREEN}},{text:'2 Sep 2026',options:{bold:true,color:GREEN}},
+  {text:'none yet — database only'},{text:'topology + IDs',options:{bold:true,color:GREEN}}]],
+ {x:0.55,y:4.96,w:12.2,colW:[1.8,2.2,4.6,3.6],fontFace:BF,fontSize:11,color:'20303C',
+  border:{pt:0.5,color:'C9D8E2'},rowH:0.36,valign:'middle'});
+body(s,'v17c is the newest SWORD (Zenodo 22259077) and is what this project uses for network '+
+ 'topology. It preserves v17b structure, so its IDs match the Version D observations '+
+ 'directly — which is why no translation was needed there, only between v17b and v16.',
+ 0.55,6.4,12.2,0.8,11.5,MUTED);
+
 /* ============ 10 TOPOLOGY ============ */
 s=light('Step 1 — deciding what a river is','Analysis');
 fig(s,F('fig07_network_topology.png'),0.55,1.4,8.6,4.6);
