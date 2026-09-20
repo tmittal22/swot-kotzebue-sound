@@ -219,10 +219,37 @@ Three independent estimates of Kobuk flow-wave celerity:
      48 / 72 / 96 h). An estimator whose output tracks an arbitrary analysis
      choice is not measuring the physical quantity.
 
+   * *Peak tracking across consecutive overpasses.* This looked like a
+     success. Of 41 multi-overpass events, 12 gave coherent straight-line
+     tracks (r2 > 0.7), all 12 on the Noatak, all 12 moving downstream, with a
+     median celerity of 1.53 m s^-1 sitting neatly inside the kinematic-wave
+     prior. Direction alone appeared decisive at p = 0.5^12.
+
+     **It is an artefact.** SWOT's consecutive passes over a river sweep along
+     it, so the centre of the observed segment marches downstream between
+     overpasses. Regressing both the anomaly-peak position and the
+     observed-segment centre on time for the same events gives a median slope
+     ratio of **0.99** (`docs/wave_artefact_test.csv`): the "wave" moves at
+     exactly the speed of the observation window. The 12/12 downstream
+     direction has the same cause, and the agreement with kinematic theory is a
+     coincidence of scale -- ~300 km of river sampled ~48 h apart happens to
+     work out near 1-2 m s^-1. Figure 10b plots peak speed against window speed
+     against a 1:1 line.
+
 **No SWOT celerity is claimed for these rivers** (PRIORS P5). The honest
 statement is that gauge and theory agree at order 1-3 m s^-1, and that the
 Thurman method does not transfer to a 21-day-repeat Arctic basin with a single
 gauge without event-level curation that four years of data do not support.
+
+What SWOT *does* measure well here is wave **length** and **amplitude**, which
+need no celerity. Applying the Thurman 90th-percentile run method
+(`docs/wave_lengths.csv`): 939 detections, median 4-8 km, with 65 exceeding
+50 km and a maximum of 243 km on the Kobuk. Only 1% fill more than 90% of the
+observed span, so truncation is not limiting. Amplitude grows upstream on all
+three rivers as the channel narrows, and the seasonal distribution of
+detections repeats the fig03 result independently: the Selawik's waves are
+almost entirely nival, the Kobuk's and Noatak's are bimodal with a rain-window
+peak.
 
 ## 8. The bloom-season link (`fig05`)
 
@@ -248,13 +275,45 @@ Weekly Kobuk SWOT stage anomaly was correlated against log10 chlorophyll in
 each of three regions at lags of 0-6 weeks, restricted to June-September. That
 is 21 tests. Bonferroni alpha = 0.00238.
 
-**Zero survive.** The largest individual correlations (inner sound r = +0.38 at
-4 weeks, p = 0.012; Hotham Inlet r = -0.38 at 0 weeks, p = 0.012) are not
-significant after correction. Four summers of weekly data is simply not enough
-statistical power, and reporting the uncorrected p-values would be
-cherry-picking.
+**Zero survive.** Four summers of weekly data is simply not enough statistical
+power.
 
-**No river-to-bloom correlation is claimed** (PRIORS P8).
+### Redoing it with the full record
+
+The SWOT stage index is not the only river forcing available. The Kobuk gauge
+spans the entire VIIRS era, so the same test run against gauged discharge from
+2012-2026 has **n = 178-217** weekly points instead of 46. That test is
+reportable (`docs/chl_discharge_lag_longrecord.csv`): **12 of 21 correlations
+survive Bonferroni.**
+
+| region | strongest lag | r | p |
+|---|---|---|---|
+| Inner sound | 2 weeks | **+0.32** | 3e-6 |
+| Hotham Inlet | 1 week | **-0.31** | 2.5e-5 |
+| Outer sound | 0 weeks | +0.24 | 3e-4 |
+
+So there **is** a robust statistical relationship between Kobuk discharge and
+apparent chlorophyll. Two things stop it being a bloom result.
+
+First, the effect is modest: |r| ~ 0.3 is under 10% of variance.
+
+Second, and more important, the signs are **opposite inside and outside Hotham
+Inlet**. High discharge goes with *lower* apparent chlorophyll in the inlet and
+*higher* apparent chlorophyll in the inner sound, peaking at a 1-2 week lag.
+That is exactly the signature of plume optics -- flushing the turbid inlet
+while exporting sediment- and CDOM-rich water into the sound -- and it is also
+what a genuine productivity response would look like. In Case-2 water the two
+are not separable from chlorophyll alone.
+
+The discriminating measurement is the red-band water-leaving radiance
+nLw(671), which responds to suspended sediment and is nearly blind to
+chlorophyll. If apparent chlorophyll tracks nLw(671), the correlation is
+optical; if it does not, there is a biological signal underneath. That
+download from CoastWatch ERDDAP was still running when this session ended
+(`src/fetch_oceancolor.py` fetches it; the chlorophyll grab took ~25 minutes,
+and these are the same size).
+
+**No biological interpretation is claimed** (PRIORS P8b).
 
 ### What can be said
 

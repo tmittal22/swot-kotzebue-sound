@@ -36,8 +36,12 @@ LON = (-165.60, -159.80)
 
 JOBS = [
     ("nesdisVHNSQchlaWeekly", "chlor_a", "2012-01-01", "2026-08-06", "chla_weekly"),
+    # nLw671 is the red water-leaving radiance band: it responds to suspended
+    # sediment and is nearly blind to chlorophyll, so it separates a river
+    # plume from a bloom in this Case-2 water.
+    ("nesdisVHNSQnLw671Weekly", "nLw_671", "2012-01-01", "2026-08-06", "nlw671_weekly"),
+    # Kd(PAR) is light attenuation: high where the water column is turbid.
     ("nesdisVHNSQkdparWeekly", "kd_par", "2012-01-01", "2026-08-06", "kdpar_weekly"),
-    ("noaacwNPPN20S3ASCIDINEOF2kmDaily", "chlor_a", "2018-01-01", "2026-09-09", "chla_2km_daily"),
 ]
 
 

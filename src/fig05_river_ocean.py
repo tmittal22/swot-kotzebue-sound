@@ -128,45 +128,53 @@ def main():
     yrdf = pd.DataFrame(rows)
     yrdf.to_csv(f"{sk.DATA}/../docs/chl_annual.csv", index=False)
 
-    # (d) week-by-week: river stage vs chlorophyll, SWOT era
+    # (d) lagged correlation on the FULL gauge record.
+    # The SWOT stage index only spans 4 summers (n~46 weekly points), which has
+    # too little power to survive multiple-comparison correction.  The Kobuk
+    # gauge covers the whole VIIRS era, giving n~217 and a real test.  SWOT is
+    # what extends this to the ungauged rivers; the gauge is what gives the
+    # statistical power here.
     ax = fig.add_subplot(gs[1, 0])
-    kob = f3.river_stage_anomaly(rch, "Kobuk")
-    # ERDDAP times are tz-naive UTC; SWOT times are tz-aware UTC
-    kob_w = (kob.set_index("time").anom.resample("W").mean()
-             .tz_convert("UTC").tz_localize(None))
+    kbq = g[g.site_no == "15744500"].dropna(subset=["q_cms"]).copy() \
+        if False else None
+    gg = sk.load_gauges("daily")
+    kbq = gg[gg.site_no == "15744500"].dropna(subset=["q_cms"]).copy()
+    kbq["t"] = kbq.time.dt.tz_convert("UTC").dt.tz_localize(None)
+    qw = kbq.set_index("t").q_cms.resample("W").mean()
     lagres = []
-    for nm, s in series.items():
-        c = s.chl.resample("W").mean()
-        both = pd.concat([np.log10(c).rename("chl"), kob_w.rename("stage")],
+    for nm, s_ in series.items():
+        c = s_.chl.resample("W").mean()
+        both = pd.concat([np.log10(c).rename("chl"), np.log10(qw).rename("q")],
                          axis=1).dropna()
         both = both[np.isin(both.index.month, [6, 7, 8, 9])]
-        if len(both) < 10:
-            continue
         for lag in range(0, 7):
-            a = both.stage.shift(lag)
-            m = pd.concat([a.rename("s"), both.chl], axis=1).dropna()
-            if len(m) < 10:
+            m = pd.concat([both.q.shift(lag).rename("q"), both.chl],
+                          axis=1).dropna()
+            if len(m) < 20:
                 continue
-            r = stats.pearsonr(m.s, m.chl)
+            r = stats.pearsonr(m.q, m.chl)
             lagres.append(dict(region=nm, lag_weeks=lag, r=r.statistic,
                                p=r.pvalue, n=len(m)))
     L = pd.DataFrame(lagres)
-    L.to_csv(f"{sk.DATA}/../docs/chl_stage_lag.csv", index=False)
+    L.to_csv(f"{sk.DATA}/../docs/chl_discharge_lag_longrecord.csv", index=False)
+    alpha_b = 0.05 / max(len(L), 1)
     for nm in REGIONS:
-        g = L[L.region == nm]
-        if len(g):
-            ax.plot(g.lag_weeks, g.r, "-o", ms=4, color=REGIONS[nm]["c"],
-                    label=f"{nm} (n={g.n.iloc[0]})")
+        gsel = L[L.region == nm]
+        if not len(gsel):
+            continue
+        ax.plot(gsel.lag_weeks, gsel.r, "-o", ms=4, color=REGIONS[nm]["c"],
+                label=f"{nm} (n={gsel.n.iloc[0]})")
+        sig = gsel[gsel.p < alpha_b]
+        ax.plot(sig.lag_weeks, sig.r, "o", ms=9, mfc="none",
+                mec=REGIONS[nm]["c"], mew=1.8)
     ax.axhline(0, color="k", lw=0.7)
-    ax.set_xlabel("lag: Kobuk stage leads chlorophyll (weeks)")
-    ax.set_ylabel("Pearson r  (log$_{10}$ chl vs stage)")
-    n_tests = len(L)
-    alpha_bonf = 0.05 / max(n_tests, 1)
-    n_sig = int((L.p < alpha_bonf).sum())
-    ax.set_title(f"(d) lagged correlation, Jun-Sep only\n"
-                 f"{n_tests} tests; {n_sig} survive Bonferroni "
-                 f"($p<{alpha_bonf:.4f}$)")
-    ax.legend(fontsize=7)
+    ax.set_xlabel("lag: Kobuk discharge leads chlorophyll (weeks)")
+    ax.set_ylabel("Pearson r  (log$_{10}$ chl vs log$_{10}$ Q)")
+    n_sig = int((L.p < alpha_b).sum())
+    ax.set_title(f"(d) Full 2012-2026 record, Jun-Sep: {n_sig} of {len(L)} "
+                 f"survive\nBonferroni (ringed). Opposite signs inside vs "
+                 "outside Hotham Inlet")
+    ax.legend(fontsize=7, loc="lower left")
 
     # (e) does the SWOT-era late-summer Kobuk pulse overlap the bloom?
     ax = fig.add_subplot(gs[1, 1])
@@ -206,8 +214,9 @@ def main():
     fig.savefig(out, dpi=170); print("wrote", out)
 
     print(f"\nmultiple comparisons: {len(L)} tests, Bonferroni alpha = "
-          f"{0.05/len(L):.5f}, surviving = {int((L.p < 0.05/len(L)).sum())}")
-    print("\nlagged correlation, Kobuk stage vs log10 chl (Jun-Sep):")
+          f"{alpha_b:.5f}, surviving = {n_sig}")
+    print("\nlagged correlation, Kobuk DISCHARGE vs log10 chl (Jun-Sep, "
+          "full 2012-2026 record):")
     print(L.sort_values(["region", "lag_weeks"]).to_string(index=False))
     print("\nJun-Sep median chl by region and year:")
     print(yrdf.pivot(index="year", columns="region", values="chl").round(2).to_string())

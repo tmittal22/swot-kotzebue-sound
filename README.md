@@ -36,6 +36,7 @@ Method follows two papers:
 | `figs/fig07_network_topology.png` | **How the three rivers were found.** Five topology steps from 292 candidate reaches to 3 mainstems, with an auditable selection table. |
 | `figs/fig08_swot_swaths.png` | What SWOT actually measured: one overpass in absolute WSE and in anomaly, the 21 ground-track passes, observation density per node. |
 | `figs/fig09_virtual_gauges.png` | Twelve SWOT virtual-gauge stage records, 4 per river. Eight are at locations that have never been gauged. |
+| `figs/fig10_wave_propagation.png` | Wave length, amplitude and seasonality, plus the artefact test that shows why SWOT celerity is not measurable here. |
 
 ### Data packet
 
@@ -102,8 +103,17 @@ python src/fig01_validation.py         # ... through fig05
 4. **The Selawik is a backwater river.** It falls 4.0 m over 166 km
    (2.4 cm km^-1), so its flow is controlled by lake and sound level rather
    than channel slope -- directly relevant to residence time.
-5. **No robust river-to-chlorophyll correlation.** Of 21 lagged correlations
-   tested, zero survive Bonferroni correction. Four summers is not enough.
+5. **Kobuk discharge does correlate with apparent chlorophyll -- over the full
+   record.** Against 4 SWOT summers (n=46) nothing survives Bonferroni; against
+   the 2012-2026 gauge record (n=178-217), **12 of 21 do**. Inner sound
+   r = +0.32 at 2 weeks, Hotham Inlet r = -0.31 at 1 week. The opposite signs
+   are equally consistent with plume optics and with productivity, and cannot
+   be separated without nLw(671). No biological claim is made.
+6. **SWOT flow-wave celerity is not measurable here.** Three estimators, three
+   failures. The most convincing one -- peak tracking, 12 coherent Noatak
+   events all moving downstream at a median 1.53 m/s -- turned out to track
+   SWOT's own ground track at a slope ratio of 0.99. Wave *length* and
+   *amplitude* are measured fine.
 
 ## About SWOT imagery
 
@@ -138,8 +148,11 @@ weakest because SWORD types those reaches 5 and 6.
 * `ice_clim_f` is a fixed climatology (identical day-of-year bounds every
   year), so it is a seasonal mask, **not** an ice detector, and cannot date
   interannual break-up.
-* Flow-wave celerity is **not** resolved by SWOT here. See
-  `docs/WALKTHROUGH.md` section 7.
+* Flow-wave celerity is **not** resolved by SWOT here, and one plausible-looking
+  positive result was an artefact of the sampling geometry. See
+  `docs/WALKTHROUGH.md` section 7 and `docs/wave_artefact_test.csv`.
+* The chlorophyll-discharge correlation is real but optically ambiguous;
+  nLw(671) is needed and was not yet downloaded.
 * Chlorophyll in Hotham Inlet reaches 8-38 mg m^-3, which is a Case-2
   retrieval artefact (sediment and CDOM read as chlorophyll), not biomass.
 * The 2026 season is truncated at 16 September and is censored, not scored.
