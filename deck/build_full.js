@@ -275,11 +275,31 @@ stat(s,'1.3-7.0 m','observed stage range\nacross the twelve',9.3,3.6,3.5);
 body(s,'Before the robust outlier filter, some of these read 13-20 m — physically impossible '+
  'and a good example of why cleaning is not optional.',9.3,5.0,3.5,1.3,11,RED);
 
+
+/* ============ per-river 2-D: Kobuk ============ */
+s=light('The Kobuk, on its own','One river at a time');
+fig(s,F('fig21a_kobuk.png'),0.55,1.4,12.2,4.6);
+explain(s,'(a) where the river sits, coloured by distance upstream so it maps directly onto the y-axis of (b); (b) every node observation as a time x distance field; (c) the same record collapsed to one number per overpass; (d) channel threading; (e) coverage in both product versions.',
+ 'Panel (c) is what a conventional gauge would give you. Panel (b) is what SWOT gives you instead — the same information plus 534 km of spatial structure that a point measurement discards entirely.',6.15);
+
+/* ============ per-river 2-D: Selawik ============ */
+s=light('The Selawik, on its own','One river at a time');
+fig(s,F('fig21b_selawik.png'),0.55,1.4,12.2,4.6);
+explain(s,'Same layout. 55,190 node observations over 166 km, 29% of the space-time grid filled — the densest of the three relative to river length, because one SWOT pass captures the entire river.',
+ 'The banding runs almost flat across the whole river: with a 2.4 cm/km gradient the Selawik rises and falls nearly in unison along its length, which is what backwater control looks like in 2-D.',6.15);
+
+/* ============ per-river 2-D: Noatak ============ */
+s=light('The Noatak, on its own','One river at a time');
+fig(s,F('fig21c_noatak.png'),0.55,1.4,12.2,4.6);
+explain(s,'Same layout. 323,183 node observations over 694 km — the largest record of the three, and the only one of the three rivers with no gauge anywhere in its history.',
+ 'The steepest river here at 79 cm/km, and the most clearly tilted banding: anomalies enter at the top of the panel and appear later at lower distances, which is the signature that motivated the celerity attempt.',6.15);
+
 /* ============ 14 2-D FIELDS ============ */
-s=light('Step 5 — the whole record in two dimensions','Analysis');
+s=light('All three together','Everything at once');
+
 fig(s,F('fig19_hovmoller.png'),0.55,1.4,8.7,5.0);
-explain(s,'Per river: x is date, y is distance upstream, colour is water-surface anomaly, gridded at 10 km x 4 days. The two narrow panels beside each carry facc (tributary inflows, dashed) and n_chan_max (multi-threaded reaches, red).',
- 'SWOT sees a whole river at once but at sparse times. A point time series discards space and a long profile discards time; this keeps both. Seasonal banding is coherent across hundreds of kilometres simultaneously.',6.55);
+explain(s,'The three rivers stacked on a common time axis, each with its own distance axis. Beside each, facc marking tributary inflows (dashed) and n_chan_max marking multi-threaded reaches (red).',
+ 'Stacked, the phase difference is visible directly: the Selawik reddens in May while the Kobuk and Noatak are still blue, and reverses by late August. That is the headline result, read off one figure.',6.55);
 stat(s,'597,344','node observations across\nthe three rivers',9.45,1.5,3.3);
 stat(s,'26-29%','of the space-time grid\nfilled; gaps are winter ice',9.45,2.9,3.3);
 body(s,'This is also the check that reach-level and node-level results agree — anything '+
