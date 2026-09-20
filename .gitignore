@@ -7,3 +7,6 @@ data/ocean/*.nc
 data/gauges/*.parquet
 __pycache__/
 *.pyc
+deck/slide-*.jpg
+deck/*.pdf
+deck/*.txt
