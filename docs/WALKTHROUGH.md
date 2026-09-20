@@ -413,6 +413,88 @@ Every headline result is unchanged under the tightened filter:
 * Kobuk peak timing: still 2/2 late, day 240 and 250.
 * Chlorophyll: still 0 of 21 lagged correlations survive Bonferroni.
 
+## 8d. Which river does what (`fig12`-`fig15`)
+
+A four-step sequence, one figure per step, to answer "what is doing what".
+
+### Step 1 (`fig12`): the six rivers
+
+| river | basin km2 | SWOT overpasses | drains to |
+|---|---|---|---|
+| Noatak | 32,000 | 166 | inner sound, at Kotzebue |
+| Kobuk | 31,000 | 193 | Hotham Inlet |
+| Selawik | 8,160 | 199 | Selawik Lake -> Hotham Inlet |
+| Buckland | 7,300 | 193 | Eschscholtz Bay |
+| Squirrel | 4,700 | 116 | Kobuk tributary, not independent |
+| Wulik | 2,300 | 122 | Chukchi coast, **not** the sound |
+
+A data caveat found here: SWORD `facc` is inflated at merged coastal outlets.
+The Noatak outlet reads **62,101 km2** against a published ~32,000, and the
+Selawik 11,616 against ~8,160, while the Kobuk (31,315 vs ~31,000), Buckland,
+Squirrel and Wulik all match well. Published basin areas are used for any size
+weighting. This is the same coastal-topology problem as PRIORS P6.
+
+### Step 2 (`fig13`): are they independent forcings?
+
+Attribution is only possible between forcings that are not collinear, so this
+is checked before, not after. Weekly May-September stage indices, pairwise:
+
+| pair | r |
+|---|---|
+| Kobuk - Squirrel | 0.86 |
+| Noatak - Squirrel | 0.81 |
+| Kobuk - Selawik | 0.78 |
+| Kobuk - Noatak | 0.76 |
+| Selawik - Wulik | **0.23** |
+
+Median off-diagonal r = **0.56**, and **5 of 15 pairs exceed 0.7**. The rivers
+share weather, so they are substantially collinear and cannot be cleanly
+separated. Kobuk-Squirrel at 0.86 is expected, since the Squirrel is a Kobuk
+tributary and is not an independent forcing at all. The Wulik is the most
+independent, which fits: it drains a different coast.
+
+The seasonal phasing panel restates the fig03 result across all six rivers.
+The Selawik spikes to +2.1 m at day 148 and decays fast; the Kobuk and Noatak
+build a second, broader maximum near day 245.
+
+### Step 3 (`fig14`): what the receiving basins do
+
+Weekly chlorophyll, nLw(671) and Kd(PAR) for five basins, 2012-2026. All three
+quantities order the same way, and that ordering is a turbidity gradient away
+from the river mouths:
+
+Selawik Lake > Hotham Inlet > Eschscholtz Bay > inner sound > outer sound
+
+That chlorophyll follows the same ranking as two independent turbidity proxies
+is itself the Case-2 warning restated (PRIORS P7).
+
+### Step 4 (`fig15`): who drives what
+
+Every river forcing against every receiving basin, at 1 and 2 week lags, raw
+and controlling for nLw(671): 70 tests, Bonferroni alpha = 0.00071.
+
+**One survives.** Kobuk gauged discharge -> inner sound, lag 2 weeks,
+partial r = 0.28, p = 4.6e-5. It is the same link established in fig11.
+
+Nothing SWOT-based survives, and the reason is power, not absence: every
+SWOT forcing has n = 28-39 weekly points against the gauge's n = 201. Two
+near-misses are worth logging for a longer record: Kobuk gauge -> Hotham Inlet
+(partial r = -0.25, p = 9e-4, just above threshold) and Buckland -> Eschscholtz
+Bay, its own receiving basin (partial r = -0.46, p = 4.6e-3, n = 37).
+
+The figure also contains a useful cautionary case. Squirrel -> outer sound
+shows raw r = 0.65 with n = 29 and carries a significance star in the raw
+panel; controlling for sediment drops it to 0.40 and it loses significance.
+The Squirrel is a Kobuk tributary hundreds of km from the outer sound, so a
+causal reading was never plausible. That is what an n = 29 correlation looks
+like before correction.
+
+**Bottom line on attribution:** with four summers, SWOT can describe what each
+river does but cannot yet say what each river does *to the sound*. The one
+robust river-to-ocean link in this basin runs from Kobuk discharge to
+inner-sound chlorophyll at a two-week lag, and it took a 15-year gauge record
+to establish it.
+
 ## 9. What would falsify or sharpen this
 
 * **The out-of-phase result.** Falsified if the Selawik peaks in late summer in

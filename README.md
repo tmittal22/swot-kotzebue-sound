@@ -38,6 +38,10 @@ Method follows two papers:
 | `figs/fig09_virtual_gauges.png` | Twelve SWOT virtual-gauge stage records, 4 per river. Eight are at locations that have never been gauged. |
 | `figs/fig10_wave_propagation.png` | Wave length, amplitude and seasonality, plus the artefact test that shows why SWOT celerity is not measurable here. |
 | `figs/fig11_optics_vs_biology.png` | Does the discharge-chlorophyll link survive controlling for suspended sediment? Three regions, three different answers. |
+| `figs/fig12_rivers_overview.png` | **Step 1.** All six rivers: SWOT stage series, basin areas, where each one drains. |
+| `figs/fig13_river_independence.png` | **Step 2.** Seasonal phasing and the inter-river correlation matrix. Are these independent forcings? Mostly not. |
+| `figs/fig14_ocean_timeseries.png` | **Step 3.** Chlorophyll, nLw(671) and Kd(PAR) for five receiving basins, 2012-2026, plus climatologies. |
+| `figs/fig15_attribution.png` | **Step 4.** Every river against every basin, raw and sediment-controlled. One of 70 survives. |
 
 ### Data packet
 
@@ -148,6 +152,25 @@ bounding box and date. The natural targets are the Kobuk delta and Hotham Inlet
 during the late-summer peaks identified in `fig03`, where the vector product is
 weakest because SWORD types those reaches 5 and 6.
 
+## Which river does what
+
+`fig12`-`fig15` are a four-step sequence on attribution. The short answer:
+
+* The six rivers are **collinear** (median pairwise r = 0.56, 5 of 15 pairs
+  above 0.7), because they share weather. That alone limits how much can be
+  attributed to any one of them.
+* The receiving basins order identically in chlorophyll, nLw(671) and Kd(PAR):
+  Selawik Lake > Hotham Inlet > Eschscholtz Bay > inner sound > outer sound.
+  That is a turbidity gradient, and chlorophyll following it is the Case-2
+  warning restated.
+* Of 70 river-by-basin tests, **one survives Bonferroni**: Kobuk gauged
+  discharge to inner-sound chlorophyll at a two-week lag. No SWOT-based
+  forcing survives, purely for lack of power (n = 28-39 against the gauge's
+  201).
+
+SWOT tells you what each river *does*. Four summers is not yet enough to say
+what each river does *to the sound*.
+
 ## Known limitations
 
 * `ice_clim_f` is a fixed climatology (identical day-of-year bounds every
@@ -161,3 +184,5 @@ weakest because SWORD types those reaches 5 and 6.
 * Chlorophyll in Hotham Inlet reaches 8-38 mg m^-3, which is a Case-2
   retrieval artefact (sediment and CDOM read as chlorophyll), not biomass.
 * The 2026 season is truncated at 16 September and is censored, not scored.
+* SWORD `facc` is inflated at merged coastal outlets: Noatak reads 62,101 km2
+  against a published ~32,000. Published basin areas are used for weighting.
