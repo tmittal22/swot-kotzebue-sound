@@ -189,6 +189,16 @@ reach translation):
 SWOT alone establishes *when* each ungauged river delivers water. It cannot yet
 establish *how much*, or what that delivery does to the sound.
 
+## On the blooms
+
+No causal claim is made, in either direction. This project measured river
+hydrology and contains no HAB cell counts, no toxin data, and no *Alexandrium*
+observations; VIIRS chlorophyll is total pigment in Case-2 water, not a HAB
+indicator. Advective supply through the Bering Strait is documented for the
+2022 event (Fachon et al. 2024) but that is one event, and it does not exclude
+a local river-modulated pathway, which this project could not have detected
+either. See `docs/WALKTHROUGH.md` section 8f.
+
 ## Known limitations
 
 * `ice_clim_f` is a fixed climatology (identical day-of-year bounds every

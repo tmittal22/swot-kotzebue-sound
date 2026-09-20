@@ -210,7 +210,7 @@ const steps=[
  ['Through the delta','The Kobuk splits; facc falls from 31,315 to 15,162 km2 and stage drops 3.0 m to 0.7 m.'],
  ['Into the inlet','Hotham Inlet and Selawik Lake follow river stage within a week (r = 0.85, 0.87).'],
  ['Out to the sound','Kobuk discharge leads inner-sound chlorophyll by ~2 weeks, surviving a sediment control.'],
- ['But the blooms','The documented toxic blooms are advected in through the Bering Strait. River flow is not their cause.']];
+ ['The blooms: open','Two competing models, neither tested here. See next slide.']];
 steps.forEach((r,i)=>{
   const y=1.5+i*0.88;
   s.addShape(pptx.ShapeType.ellipse,{x:0.6,y:y+0.06,w:0.42,h:0.42,
@@ -222,6 +222,41 @@ steps.forEach((r,i)=>{
   s.addText(r[1],{x:4.2,y:y+0.03,w:8.5,h:0.75,fontFace:BF,fontSize:11.5,
     color:'20303C',lineSpacing:15,margin:0,valign:'top'});
 });
+
+/* 11b competing models */
+s=light('The blooms: two models, neither tested here','Open question');
+body(s,'This project measured river hydrology. It did not measure blooms, and it '+
+  'cannot arbitrate between these. Both are live, and they are not mutually '+
+  'exclusive.',0.55,1.45,12.2,0.75,13);
+s.addShape(pptx.ShapeType.roundRect,{x:0.55,y:2.35,w:6.0,h:3.5,fill:{color:ICE},
+  line:{color:TEAL,width:0.9},rectRadius:0.06});
+s.addText('Model A - advective supply',{x:0.95,y:2.6,w:5.2,h:0.4,fontFace:HF,
+  fontSize:17,bold:true,color:INK,margin:0});
+body(s,'Blooms form offshore in the Bering Sea and are carried north through the '+
+  'Bering Strait; local cyst beds germinate when bottom water is warm enough.',
+  0.95,3.1,5.2,1.0,12);
+s.addText('Evidence',{x:0.95,y:4.15,w:5.2,h:0.3,fontFace:BF,fontSize:11,bold:true,
+  color:TEAL,margin:0});
+bul(s,['The 2022 event was tracked entering from the west and advecting north (Fachon et al. 2024)',
+       'That year the Ledyard Bay cyst bed was thermally suppressed, ~1.8 C',
+       'Cells were dense across a wide range of nutrient concentrations'],
+  0.95,4.45,5.2,1.3,10.5);
+s.addShape(pptx.ShapeType.roundRect,{x:6.8,y:2.35,w:6.0,h:3.5,fill:{color:'FBF3E8'},
+  line:{color:AMBER,width:0.9},rectRadius:0.06});
+s.addText('Model B - local river modulation',{x:7.2,y:2.6,w:5.2,h:0.4,fontFace:HF,
+  fontSize:17,bold:true,color:INK,margin:0});
+body(s,'River freshwater sets stratification, delivers terrestrial nutrients and '+
+  'organic matter, and controls flushing of the inlet, modulating how a bloom '+
+  'develops once cells are present.',7.2,3.1,5.2,1.0,12);
+s.addText('What this project adds',{x:7.2,y:4.15,w:5.2,h:0.3,fontFace:BF,fontSize:11,
+  bold:true,color:AMBER,margin:0});
+bul(s,['Kobuk discharge leads inner-sound chlorophyll by ~2 weeks, surviving a sediment control (r = 0.28, n = 201)',
+       'Kobuk and Noatak peak inside the bloom window; the Selawik does not',
+       'But chlorophyll is not Alexandrium, and CDOM is still uncontrolled'],
+  7.2,4.45,5.2,1.3,10.5);
+body(s,'Separating them needs what this project does not have: HAB cell counts or '+
+  'toxin data, a CDOM control, and moorings or a circulation model for the sound.',
+  0.55,6.1,12.2,0.8,12.5,RED);
 
 /* 12 close */
 s=dark();
@@ -235,7 +270,7 @@ s.addText([{text:'Can.  ',options:{bold:true,color:GREEN}},
 s.addText([{text:'Cannot.  ',options:{bold:true,color:AMBER}},
  {text:'Absolute freshwater flux (SWOT discharge is 2.9x low), flow-wave celerity '+
  '(three estimators, three failures), attribution from SWOT alone (n = 28-39), or '+
- 'the cause of the harmful algal blooms.',options:{color:'CFE0EA'}}],
+ 'or anything about what causes the harmful algal blooms.',options:{color:'CFE0EA'}}],
  {x:0.8,y:3.5,w:11.6,h:1.1,fontFace:BF,fontSize:14.5,lineSpacing:22,margin:0});
 s.addShape(pptx.ShapeType.rect,{x:0.8,y:4.9,w:1.5,h:0.045,fill:{color:AMBER}});
 s.addText('All data public and unauthenticated: PO.DAAC Hydrocron, SWORD v17c and '+

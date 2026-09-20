@@ -557,6 +557,42 @@ The honest summary: SWOT alone can establish **when** each ungauged river
 delivers water, and cannot yet establish **how much**, or what that delivery
 does to the sound.
 
+## 8f. The blooms: what is and is not established
+
+Worth stating explicitly, because it is the easiest thing in this project to
+overclaim, and an earlier draft of the deck did exactly that.
+
+**This project measured river hydrology. It did not measure blooms.** There are
+no HAB cell counts, no toxin measurements, and no *Alexandrium* observations
+anywhere in it. Chlorophyll from VIIRS is total pigment in Case-2 water, and is
+not a HAB indicator.
+
+Two models are live, and they are **not mutually exclusive**:
+
+**Model A, advective supply.** Blooms form offshore in the Bering Sea and are
+carried north through the Bering Strait; benthic cyst beds germinate where
+bottom water is warm enough. Fachon et al. (2024, *L&O Letters*,
+10.1002/lol2.10421) tracked the 2022 event entering from the west and advecting
+north, found the Ledyard Bay cyst bed thermally suppressed at ~1.8 C that year,
+and observed dense cells across a wide range of nutrient concentrations.
+
+**Model B, local river modulation.** River freshwater sets stratification,
+delivers terrestrial nutrients and organic matter, and controls flushing of the
+inlet, modulating how a bloom develops once cells are present. This project
+contributes the Kobuk-to-inner-sound chlorophyll lead at ~2 weeks (r = 0.28,
+n = 201, surviving a sediment control), and the observation that the Kobuk and
+Noatak peak inside the bloom window while the Selawik does not.
+
+**What cannot be concluded.** That Model A explains blooms generally: it rests
+on one well-documented event. That Model B is ruled out: absence of evidence in
+a single cruise is not evidence of absence, and no test here could have detected
+a river contribution to *Alexandrium* specifically. **No causal claim about
+bloom formation is made in either direction.**
+
+Separating them requires what this project does not have: HAB cell counts or
+toxin data, a CDOM control on the chlorophyll retrieval, and moorings or a
+circulation model for the sound.
+
 ## 9. What would falsify or sharpen this
 
 * **The out-of-phase result.** Falsified if the Selawik peaks in late summer in
