@@ -135,6 +135,51 @@ the gauge result. At n = 12 the inner- and outer-sound partial correlations
 change sign relative to the n = 201 gauge analysis. Reported as a power limit,
 not as a finding.
 
+## P13 -- Identify which branch of a dual-branch product you are using
+The SoS discharge product carries **both** a gauge-constrained and an
+unconstrained branch (CMR: SWOT_L4_HR_DAWG_SOS_DISCHARGE_V3), and Hydrocron's
+documentation does not state which it serves.
+**Test:** a gauge-constrained estimate evaluated at a gauged reach cannot be
+badly biased; check the bias at Kiana.
+**State: RESOLVED BY INFERENCE.** The 2.9x low bias at a reach 3.6 km from an
+active USGS gauge is incompatible with a gauge-constrained estimate, so what
+Hydrocron serves here is the unconstrained branch, or Kiana is absent from its
+constraining gauge set. Either way the product is an inversion from global
+priors, and a ~3x bias on an ungauged Arctic river is expected behaviour rather
+than a failure. This does not change any conclusion: SoS is used for shape
+only (P11).
+
+## P14 -- Version stability must be checked per variable, not per product
+**Test:** match Version D (SWORD v17b) against Version 2.0 (SWORD v16) on
+identical reaches within 30 minutes; `docs/version_comparison.csv`, n = 4,849.
+**State: PASS for elevation, CAUTION for width.**
+
+| field | r between versions | median relative difference |
+|---|---|---|
+| WSE | 0.999996 | 0.08% |
+| slope | 0.937 | 1.6% |
+| width | 0.963 | **8.1%** |
+
+Elevation is stable to a fraction of a centimetre, so every WSE-based result
+here is version-independent. Width is not, which is consistent with Thurman et
+al. declining to use SWOT width at all. No width-based conclusion is drawn.
+
+## P15 -- A one-dimensional river reading requires a single channel
+**Test:** SWORD `n_chan_max` along each mainstem;
+`docs/river_contributions.csv`.
+**State: VIOLATED ON THE KOBUK, and stated rather than ignored.**
+
+| river | multi-threaded reaches | max channels | tributary inflows |
+|---|---|---|---|
+| Noatak | 81% | 8 | 12 |
+| Kobuk | **100%** | 6 | 13 |
+| Selawik | 50% | 3 | 3 |
+
+Every observed Kobuk reach is multi-threaded, so reach-averaged width and
+elevation aggregate across threads along the entire river, not only in the
+delta. Contributions are therefore ranked by `facc` step at confluences, which
+is mass-based; width and SoS discharge are not used for partitioning.
+
 ## P9 -- Incomplete seasons must be censored, not scored
 **State: ENFORCED.** The 2026 record ends 16 September with the Kobuk stage
 index still rising. Scoring it would have reported a spring peak purely from

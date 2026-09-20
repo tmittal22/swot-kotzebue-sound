@@ -18,7 +18,7 @@ function light(title,kicker,step){
     fontSize:11,color:TEAL,bold:true,charSpacing:1.6,margin:0});
   s.addText(title,{x:0.55,y:0.56,w:11.3,h:0.72,fontFace:HF,fontSize:28,bold:true,
     color:INK,margin:0});
-  if(step!==undefined){
+  if(step!==undefined && step!==null){
     s.addShape(pptx.ShapeType.ellipse,{x:12.15,y:0.32,w:0.6,h:0.6,fill:{color:AMBER}});
     s.addText(String(step),{x:12.15,y:0.32,w:0.6,h:0.6,fontFace:HF,fontSize:19,
       bold:true,color:INK,align:'center',valign:'middle',margin:0});
@@ -99,9 +99,35 @@ stat(s,'r = 0.99','shape, in log space —\nthe hydrograph is right',9.4,2.15,3.
 stat(s,'2.9x low','median bias, NSE = -2.0 —\nmagnitude is not usable',9.4,3.55,3.4,RED);
 body(s,'So relative and seasonal statements are supported; absolute freshwater '+
   'flux is not. Nothing downstream computes a flux budget.',9.4,5.0,3.4,1.3,11.5,INK);
-body(s,'Caveat: SoS is a model-based inversion, and I have not verified whether '+
-  'Hydrocron serves the constrained or unconstrained run.',
-  9.4,6.15,3.4,1.0,10.5,RED);
+body(s,'The SoS product carries BOTH a gauge-constrained and an unconstrained '+
+  'branch, and Hydrocron does not say which it serves. But a gauge-constrained '+
+  'estimate at a gauged reach would not be 3x off, so this is the unconstrained '+
+  'branch (or Kiana is not in its gauge set). Either way: an inversion from '+
+  'global priors, so a 3x bias on an ungauged Arctic river is expected, not a '+
+  'failure.',9.4,5.95,3.4,1.5,9.5,RED);
+
+/* 5b version comparison */
+s=light('Which product version, and does it matter?','Data versions');
+fig(s,F('fig18_version_comparison.png'),0.55,1.5,8.6,5.3);
+body(s,'Two processing versions cover the same KaRIn observations. The official '+
+  'v17b-to-v16 reach translation maps all 162 domain reaches, so identical '+
+  'reaches can be compared directly, matched within 30 minutes (n = 4,849).',
+  9.4,1.55,3.4,1.7);
+s.addTable([
+  [{text:'field',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'r',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'median diff',options:{bold:true,color:WHITE,fill:{color:INK}}}],
+  [{text:'WSE'},{text:'0.999996',options:{color:GREEN,bold:true}},{text:'0.08%'}],
+  [{text:'slope'},{text:'0.937'},{text:'1.6%'}],
+  [{text:'width'},{text:'0.963'},{text:'8.1%',options:{color:RED,bold:true}}]],
+  {x:9.4,y:3.4,w:3.4,colW:[1.0,1.2,1.2],fontFace:BF,fontSize:10.5,
+   color:'20303C',rowH:0.38,valign:'middle',border:{pt:0.5,color:'C9D8E2'}});
+body(s,'Elevation is version-stable to a fraction of a centimetre. Width is not, '+
+  'which matches Thurman et al. declining to use SWOT width at all.',
+  9.4,5.1,3.4,1.3,11.5,TEAL);
+body(s,'The real trade is record length versus discharge: Version D runs to Sep '+
+  '2026, Version 2.0 stops in 2025 but is the only one carrying SoS.',
+  9.4,6.3,3.4,1.1,10.5,MUTED);
 
 /* 6 step 4 the three rivers */
 s=light('The three rivers, side by side','Step 4',4);
@@ -134,6 +160,58 @@ body(s,'Freshwater arriving during the summer bloom window is Kobuk and Noatak '
   'water, not Selawik water.',9.4,4.7,3.4,1.4,12.5,TEAL);
 body(s,'Recovered independently from SWOT discharge alone, with no gauge: '+
   'Selawik day 154, Kobuk 236, Noatak 251.',9.4,6.1,3.4,1.1,11,MUTED);
+
+/* 7b 2-D view */
+s=light('The whole record, in two dimensions','Step 5b');
+fig(s,F('fig19_hovmoller.png'),0.55,1.4,8.7,5.6);
+body(s,'SWOT measures a whole river at once but at sparse times. A point time '+
+  'series throws away space; a long profile throws away time. This keeps both: '+
+  'x is date, y is distance upstream, colour is water-surface anomaly.',
+  9.5,1.5,3.3,1.8);
+body(s,'Seasonal banding is visible as vertical red and blue stripes, coherent '+
+  'along hundreds of kilometres at once.',9.5,3.4,3.3,1.2,12,TEAL);
+s.addText('Grid filled',{x:9.5,y:4.7,w:3.3,h:0.3,fontFace:BF,fontSize:11,
+  bold:true,color:INK,margin:0});
+body(s,'26% Noatak, 26% Kobuk, 29% Selawik of a 10 km x 4 day grid across the '+
+  'full record. The gaps are the ice-covered winters.',9.5,5.05,3.3,1.3,11);
+body(s,'597,344 node observations on these three rivers alone.',
+  9.5,6.4,3.3,0.7,11.5,MUTED);
+
+/* 7c contributions and channels */
+s=light('Contributions, and where 1-D breaks down','Step 5c');
+body(s,'Two things control how a river reading should be interpreted: where '+
+  'tributaries add drainage area, and whether the channel is single or '+
+  'multi-threaded. Both come straight from SWORD and are shown beside each '+
+  '2-D panel on the previous slide.',0.55,1.45,12.2,0.8,13);
+s.addTable([
+  [{text:'river',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'reaches',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'tributary inflows',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'multi-threaded',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'max channels',options:{bold:true,color:WHITE,fill:{color:INK}}},
+   {text:'facc span (km2)',options:{bold:true,color:WHITE,fill:{color:INK}}}],
+  [{text:'Noatak'},{text:'57'},{text:'12'},{text:'81%'},{text:'8'},{text:'953 - 61,951'}],
+  [{text:'Kobuk'},{text:'40'},{text:'13'},
+   {text:'100%',options:{bold:true,color:RED}},{text:'6'},{text:'1,977 - 31,315'}],
+  [{text:'Selawik'},{text:'12'},{text:'3'},{text:'50%'},{text:'3'},{text:'4,029 - 11,191'}]],
+  {x:0.55,y:2.5,w:12.2,colW:[1.7,1.5,2.4,2.2,2.0,2.4],fontFace:BF,fontSize:12,
+   color:'20303C',rowH:0.5,valign:'middle',border:{pt:0.5,color:'C9D8E2'}});
+s.addShape(pptx.ShapeType.roundRect,{x:0.55,y:4.7,w:6.0,h:2.2,fill:{color:'FBEEE9'},
+  line:{color:RED,width:0.85},rectRadius:0.06});
+s.addText('The Kobuk problem',{x:0.95,y:4.9,w:5.2,h:0.35,fontFace:HF,fontSize:15,
+  bold:true,color:RED,margin:0});
+body(s,'Every single observed Kobuk reach is multi-threaded, up to 6 channels. '+
+  'So SWOT reach-averaged width and elevation aggregate across threads along '+
+  'the entire river, not just in the delta. This is exactly the regime Gleason '+
+  'et al. identify as hardest to model.',0.95,5.3,5.2,1.5,11.5);
+s.addShape(pptx.ShapeType.roundRect,{x:6.8,y:4.7,w:5.95,h:2.2,fill:{color:ICE},
+  line:{color:TEAL,width:0.85},rectRadius:0.06});
+s.addText('How to compare contributions',{x:7.2,y:4.9,w:5.2,h:0.35,fontFace:HF,
+  fontSize:15,bold:true,color:INK,margin:0});
+bul(s,['Rank by facc step at each confluence — the only mass-based measure available',
+       'Do NOT use SWOT width: 8% version-unstable and aggregated across threads',
+       'Do NOT use SoS discharge for partitioning: 2.9x biased'],
+  7.2,5.3,5.2,1.5,11);
 
 /* 8 main vs channels */
 s=light('Main stem versus every delta channel','Step 6',6);
