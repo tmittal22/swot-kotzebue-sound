@@ -96,7 +96,18 @@ Inlet (inlet r = -0.31 at 1 week; inner sound r = +0.32 at 2 weeks). That
 pattern is what plume optics would produce -- flushing of the turbid inlet plus
 export of sediment- and CDOM-rich water into the sound -- and equally what a
 real productivity response would produce.
-**State: PARTIALLY RESOLVED** by the nLw(671) control (`fig11`,
+**State: RESOLVED as far as ocean colour permits.** The CDOM gap flagged below
+was closed with nLw(410), the most CDOM-sensitive VIIRS band on the identical
+grid (`fig23`, `docs/chl_cdom_control.csv`). Controlling for sediment AND CDOM
+together, the inner-sound correlation does not erode -- at lag 2 it goes
+raw +0.324, sediment-removed +0.284, both-removed **+0.290**. 5 of 12 tests
+survive Bonferroni: inner sound at lags 1-3, Hotham Inlet at lags 0-1. The
+outer sound still dies, as it should. The remaining inner-sound signal is
+therefore neither suspended sediment nor coloured dissolved organic matter.
+Confirming it is phytoplankton needs cell counts, which no optical product can
+supply.
+
+Originally **PARTIALLY RESOLVED** by the nLw(671) control (`fig11`,
 `docs/chl_optics_partial.csv`). Partial correlation of log Q against log chl
 controlling for nLw(671), 12 tests, Bonferroni alpha = 0.00417:
 

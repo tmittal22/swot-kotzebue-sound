@@ -28,7 +28,12 @@ LON = (-165.60, -159.80)
 YEARS = range(2012, 2027)
 
 JOBS = [("nesdisVHNSQnLw671Weekly", "nLw_671", "nlw671_weekly"),
-        ("nesdisVHNSQkdparWeekly", "kd_par", "kdpar_weekly")]
+        ("nesdisVHNSQkdparWeekly", "kd_par", "kdpar_weekly"),
+        # 410 nm is the most CDOM-sensitive VIIRS band: coloured dissolved
+        # organic matter absorbs strongly in the blue, so HIGH CDOM gives LOW
+        # nLw(410).  Same sensor, same grid, same processing as the chlorophyll
+        # and nLw(671) series, so it is directly comparable as a second control.
+        ("nesdisVHNSQnLw410Weekly", "nLw_410", "nlw410_weekly")]
 
 
 def one_year(args):

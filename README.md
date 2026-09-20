@@ -207,8 +207,9 @@ either. See `docs/WALKTHROUGH.md` section 8f.
 * Flow-wave celerity is **not** resolved by SWOT here, and one plausible-looking
   positive result was an artefact of the sampling geometry. See
   `docs/WALKTHROUGH.md` section 7 and `docs/wave_artefact_test.csv`.
-* The chlorophyll-discharge correlation is real but optically ambiguous;
-  nLw(671) is needed and was not yet downloaded.
+* The inner-sound chlorophyll-discharge correlation survives controls for both
+  sediment and CDOM, but ocean colour cannot confirm it is phytoplankton. That
+  needs HAB cell counts or toxin data.
 * Chlorophyll in Hotham Inlet reaches 8-38 mg m^-3, which is a Case-2
   retrieval artefact (sediment and CDOM read as chlorophyll), not biomass.
 * The 2026 season is truncated at 16 September and is censored, not scored.

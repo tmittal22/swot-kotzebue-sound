@@ -578,10 +578,30 @@ body(s,'r(Q, nLw) = −0.03, so the plume is not involved, and the partial corre
 body(s,'The lag structure is the argument. A signal that is weakest when the plume dominates '+
  'and peaks two weeks later, after the plume tracer has decorrelated, is what growth looks '+
  'like rather than what an optical artefact looks like.',0.55,5.0,12.2,0.8,13,TEAL);
-body(s,'Residual limitation: nLw(671) controls for SEDIMENT, not CDOM, which absorbs in the '+
- 'blue and is a major Arctic plume constituent. The lag argument weighs against a pure-CDOM '+
- 'explanation but does not exclude it. aCDOM(443) is the next control.',
- 0.55,5.9,12.2,0.9,12,RED);
+body(s,'Residual limitation at this stage: nLw(671) controls for SEDIMENT, not CDOM. That gap '+
+ 'is closed on the next slide using nLw(410), and the result holds.',
+ 0.55,5.9,12.2,0.9,12,AMBER);
+
+
+/* ============ CDOM control ============ */
+s=light('Step 14b — and controlling for CDOM as well','Ocean');
+fig(s,F('fig23_cdom_control.png'),0.55,1.4,8.6,4.6);
+explain(s,'nLw(410) is the most CDOM-sensitive VIIRS band on the identical grid and processing chain — CDOM absorbs strongly in the blue. Controlling for nLw(671) AND nLw(410) removes the sediment and dissolved-organic pathways together.',
+ 'This was the stated weak point of the previous slide. The inner-sound signal does not merely survive it — adding the CDOM control slightly RAISES the partial correlation rather than eroding it.',6.15);
+s.addTable([
+ [{text:'Inner sound, lag 2',options:{bold:true,color:WHITE,fill:{color:INK}}},
+  {text:'r',options:{bold:true,color:WHITE,fill:{color:INK}}}],
+ [{text:'raw'},{text:'+0.324'}],
+ [{text:'− sediment'},{text:'+0.284'}],
+ [{text:'− sediment − CDOM'},{text:'+0.290',options:{bold:true,color:GREEN}}]],
+ {x:9.3,y:1.5,w:3.5,colW:[2.4,1.1],fontFace:BF,fontSize:10.5,color:'20303C',
+  rowH:0.4,valign:'middle',border:{pt:0.5,color:'C9D8E2'}});
+stat(s,'5 of 12','survive both controls',9.3,3.3,3.5,GREEN);
+body(s,'Inner sound at lags 1, 2 and 3; Hotham Inlet at lags 0 and 1. The outer sound '+
+ 'still dies, as it should — that one was always the plume.',9.3,4.6,3.5,1.4,11.5);
+body(s,'So the remaining inner-sound signal is neither suspended sediment nor coloured '+
+ 'dissolved organic matter. That is as far as ocean colour alone can take it: confirming '+
+ 'phytoplankton needs cell counts.',9.3,6.0,3.5,1.4,11,TEAL);
 
 /* ============ 27 ATTRIBUTION ============ */
 s=light('Step 15 — who drives what','Ocean');
