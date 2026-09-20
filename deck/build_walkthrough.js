@@ -139,8 +139,8 @@ body(s,'Recovered independently from SWOT discharge alone, with no gauge: '+
 s=light('Main stem versus every delta channel','Step 6',6);
 fig(s,F('fig17_channels_and_lakes.png'),0.55,1.5,8.6,5.3);
 body(s,'The Kobuk does not reach Hotham Inlet as one channel. It splits, and '+
-  'SWORD facc DROPS downstream as it does: 31,315 km2 in the single stem, '+
-  '15,162 km2 in one delta arm.',9.4,1.55,3.4,1.8);
+  'facc DROPS downstream as it does: 31,315 km2 in the single stem, '+
+  '15,162 km2 in one delta arm.',9.4,1.55,3.35,1.8);
 s.addTable([
   [{text:'',options:{fill:{color:INK}}},
    {text:'median WSE',options:{bold:true,color:WHITE,fill:{color:INK}}},
