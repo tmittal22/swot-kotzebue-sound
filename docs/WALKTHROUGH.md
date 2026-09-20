@@ -495,6 +495,68 @@ robust river-to-ocean link in this basin runs from Kobuk discharge to
 inner-sound chlorophyll at a two-week lag, and it took a 15-year gauge record
 to establish it.
 
+## 8e. A SWOT-only analysis (`fig16`)
+
+Everything above leans on the Kobuk gauge somewhere. That is a problem, because
+the Selawik and Noatak have no gauge and never have: if a SWOT-only workflow
+cannot stand alone, nothing quantitative can be said about them.
+
+### Getting SWOT discharge at all
+
+The SoS product (SWOT Discharge Algorithm Working Group) is exposed by
+Hydrocron, but only on the **Version 2.0** collection, which is built on SWORD
+**v16** while everything else here uses Version D / SWORD v17b. The official
+v17b-to-v16 reach translation table (Zenodo 22259077) maps all 162 domain
+reaches cleanly; only the North America reach file, 0.9 MB compressed, was
+range-fetched out of the 266 MB archive. Version 2.0 processing stops in 2025,
+so the SoS record is shorter than the water-surface record.
+
+Of the six SoS algorithms, `sic4dvar` dominates the consensus here;
+`hivdi` returns nothing and `sad` almost nothing, so the "consensus" is not a
+consensus of many.
+
+### What SWOT-only discharge is good for
+
+Validated against the Kiana gauge on 13 ice-free coincident pairs:
+
+| property | result | verdict |
+|---|---|---|
+| shape, r in log space | **0.991** | excellent |
+| median bias | **0.35x** (2.9x too low) | poor |
+| NSE | **-2.0** | worse than predicting the mean |
+
+So SWOT-only discharge is a **shape estimator, not a magnitude estimator**.
+That distinction sets what the rest of the analysis is allowed to claim: no
+absolute freshwater flux, and no cross-river flux budget (PRIORS P11).
+
+### Does SWOT alone recover the headline?
+
+Yes. Running the seasonal phase analysis on SoS discharge only, with no gauge
+anywhere (`docs/swot_only_seasonality.csv`):
+
+| river | day of max | late/spring ratio | verdict |
+|---|---|---|---|
+| Selawik | **154** | 0.63 | spring |
+| Kobuk | **236** | 1.32 | late |
+| Noatak | **251** | 1.58 | late |
+| Wulik | 221 | 1.14 | late |
+| Buckland | 242 | 1.00 | ambiguous |
+
+The out-of-phase Selawik/Kobuk structure is recovered independently, from a
+different SWOT product, with no in-situ data involved (PRIORS P12).
+
+### Where SWOT alone fails
+
+The chlorophyll attribution. Substituting SoS discharge for gauged discharge
+leaves **n = 12** weekly points, and at that sample size the inner- and
+outer-sound partial correlations *change sign* relative to the n = 201
+gauge-based analysis. This is not a competing result; it is what an
+underpowered estimate looks like, and it is the same limit found in fig15.
+
+The honest summary: SWOT alone can establish **when** each ungauged river
+delivers water, and cannot yet establish **how much**, or what that delivery
+does to the sound.
+
 ## 9. What would falsify or sharpen this
 
 * **The out-of-phase result.** Falsified if the Selawik peaks in late summer in

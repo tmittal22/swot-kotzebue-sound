@@ -114,6 +114,27 @@ sediment, yet the chlorophyll signal strengthens at 2-3 weeks when the sediment
 coupling has gone to zero -- but it does not exclude it. A blue-band or
 aCDOM(443) control is the next step.
 
+## P11 -- A discharge product must be validated for the property it is used for
+SWOT SoS discharge is used here for seasonal SHAPE, never for absolute flux.
+**Test:** compare SoS against the Kiana gauge in log space (shape) and by
+median ratio / NSE (magnitude); `fig16`, `docs/swot_only_seasonality.csv`.
+**State: PASS for shape, FAIL for magnitude.** n = 13 ice-free coincident
+pairs: r(log) = **0.991**, median bias **0.35x** (2.9x too low), **NSE = -2.0**
+(worse than predicting the mean). No absolute freshwater flux is computed from
+SWOT, and no cross-river flux budget is attempted.
+
+## P12 -- A SWOT-only workflow must reproduce the gauge-based result to be trusted
+**Test:** rerun the seasonal phase analysis using only SoS discharge, with no
+gauge anywhere.
+**State: PASS.** SWOT alone gives Selawik day 154 (spring), Kobuk day 236 and
+Noatak day 251 (late) -- the same out-of-phase structure obtained from
+water-surface elevation and, for the Kobuk, from the gauge. Buckland is flagged
+ambiguous (late/spring ratio 1.003).
+**Counter-case:** the SWOT-only chlorophyll attribution does **not** reproduce
+the gauge result. At n = 12 the inner- and outer-sound partial correlations
+change sign relative to the n = 201 gauge analysis. Reported as a power limit,
+not as a finding.
+
 ## P9 -- Incomplete seasons must be censored, not scored
 **State: ENFORCED.** The 2026 record ends 16 September with the Kobuk stage
 index still rising. Scoring it would have reported a spring peak purely from

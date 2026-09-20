@@ -342,6 +342,20 @@ s.addText('No SWOT forcing survives — power, not absence. n = 28–39 weekly p
     lineSpacing: 17, margin: 0 });
 caption(s, 'Fig 15 — rows are river forcings, columns are receiving basins', 0.6, 6.0, 8.6);
 
+/* ---------------- 16b SWOT-ONLY ---------------- */
+s = lightSlide('Can SWOT stand on its own?', 'SWOT-only');
+fig(s, F('fig16_swot_only.png'), 0.6, 1.5, 8.5, 5.3);
+s.addText('It has to. The Selawik and Noatak have no gauge, so a SWOT-only workflow is the only quantitative option for them.',
+  { x: 9.35, y: 1.6, w: 3.4, h: 1.1, fontFace: BF, fontSize: 12.5, color: '20303C',
+    lineSpacing: 18, margin: 0 });
+s.addText('SoS discharge, validated at the one gauge:', { x: 9.35, y: 2.75, w: 3.4,
+  h: 0.35, fontFace: BF, fontSize: 12, bold: true, color: INK, margin: 0 });
+stat(s, 'r = 0.99', 'in log space — the shape\nis essentially perfect', 9.35, 3.15, 3.4, '1B7A4B');
+stat(s, '2.9x low', 'median bias; NSE = -2.0.\nMagnitude is unusable', 9.35, 4.55, 3.4, RED);
+s.addText('So SWOT-only discharge is a shape estimator. Used that way, it recovers the phase split with no gauge at all: Selawik peaks day 154, Kobuk 236, Noatak 251.',
+  { x: 9.35, y: 5.95, w: 3.4, h: 1.3, fontFace: BF, fontSize: 12, color: TEAL,
+    bold: true, lineSpacing: 17, margin: 0 });
+
 /* ---------------- 17 WHAT WE CAN SAY ---------------- */
 s = lightSlide('What the data support, and what they do not', 'Summary');
 s.addShape(pptx.ShapeType.roundRect, { x: 0.6, y: 1.5, w: 5.95, h: 4.35,

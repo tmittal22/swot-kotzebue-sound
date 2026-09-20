@@ -42,6 +42,7 @@ Method follows two papers:
 | `figs/fig13_river_independence.png` | **Step 2.** Seasonal phasing and the inter-river correlation matrix. Are these independent forcings? Mostly not. |
 | `figs/fig14_ocean_timeseries.png` | **Step 3.** Chlorophyll, nLw(671) and Kd(PAR) for five receiving basins, 2012-2026, plus climatologies. |
 | `figs/fig15_attribution.png` | **Step 4.** Every river against every basin, raw and sediment-controlled. One of 70 survives. |
+| `figs/fig16_swot_only.png` | **SWOT-only.** SoS discharge with no gauge in the analysis: what it can and cannot support. |
 
 ### Data packet
 
@@ -170,6 +171,23 @@ weakest because SWORD types those reaches 5 and 6.
 
 SWOT tells you what each river *does*. Four summers is not yet enough to say
 what each river does *to the sound*.
+
+## Can SWOT stand on its own?
+
+It has to, for the Selawik and Noatak. Using the SoS discharge product
+(Hydrocron Version 2.0 collection, reached through the official v17b-to-v16
+reach translation):
+
+* Validated at the one gauge, SWOT-only discharge is an **excellent shape
+  estimator and a poor magnitude estimator**: r = 0.991 in log space, but a
+  median bias of 0.35x and NSE = -2.0. No absolute flux is computed from it.
+* Used as a shape estimator, SWOT alone **recovers the phase split with no
+  in-situ data**: Selawik peaks day 154, Kobuk day 236, Noatak day 251.
+* SWOT alone **cannot** do the chlorophyll attribution. At n = 12 the
+  correlations change sign against the n = 201 gauge analysis.
+
+SWOT alone establishes *when* each ungauged river delivers water. It cannot yet
+establish *how much*, or what that delivery does to the sound.
 
 ## Known limitations
 
