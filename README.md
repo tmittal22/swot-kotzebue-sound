@@ -32,6 +32,17 @@ Method follows two papers:
 | `figs/fig03_seasonal_regime.png` | Seasonal regime; Kobuk late-summer peaks vs Selawik spring freshet. |
 | `figs/fig04_flow_waves.png` | Distance-time anomaly maps, spatial hydrographs, celerity estimates. |
 | `figs/fig05_river_ocean_coupling.png` | Bloom-season chlorophyll vs river forcing, with Case-2 caveats. |
+| `figs/fig06_satellite_basemap.png` | Study area on Esri World Imagery: rivers, communities, gauge, Hotham Inlet and Selawik Lake labelled, plus a Kobuk-delta inset. |
+| `figs/fig07_network_topology.png` | **How the three rivers were found.** Five topology steps from 292 candidate reaches to 3 mainstems, with an auditable selection table. |
+| `figs/fig08_swot_swaths.png` | What SWOT actually measured: one overpass in absolute WSE and in anomaly, the 21 ground-track passes, observation density per node. |
+| `figs/fig09_virtual_gauges.png` | Twelve SWOT virtual-gauge stage records, 4 per river. Eight are at locations that have never been gauged. |
+
+### Data packet
+
+`packet/` holds flat, quality-controlled exports for a collaborator, described
+by `packet/MANIFEST.md`: reach and node time series, reference long profiles,
+the virtual-gauge index, USGS daily and 15-minute records converted to UTC,
+regional weekly chlorophyll, and the SWORD inventory.
 
 Supporting documents:
 
@@ -93,6 +104,34 @@ python src/fig01_validation.py         # ... through fig05
    than channel slope -- directly relevant to residence time.
 5. **No robust river-to-chlorophyll correlation.** Of 21 lagged correlations
    tested, zero survive Bonferroni correction. Four summers is not enough.
+
+## About SWOT imagery
+
+The figures here render the SWOT **vector** product (`L2_HR_RiverSP`): every
+200 m node KaRIn returned, positioned and coloured by its measurement
+(`fig08`). That is the same KaRIn retrieval, aggregated to the SWORD centreline.
+
+SWOT also produces true raster imagery that is **not** used here:
+
+| product | what it is | why it is absent |
+|---|---|---|
+| `L2_HR_Raster` | gridded 100 m / 250 m WSE and water-mask images | needs an Earthdata Login |
+| `L2_HR_PIXC` | the underlying 10-60 m pixel cloud | needs an Earthdata Login |
+| `L2_HR_PIXCVec` | pixel cloud tagged to SWORD reaches/nodes | needs an Earthdata Login |
+
+Hydrocron is the exception that made this project possible without credentials.
+To add raster imagery, register at <https://urs.earthdata.nasa.gov>, then:
+
+```bash
+printf 'machine urs.earthdata.nasa.gov login USER password PASS\n' >> ~/.netrc
+chmod 600 ~/.netrc
+python -c "import earthaccess; earthaccess.login(strategy='netrc')"
+```
+
+`earthaccess` (already installed) can then search `SWOT_L2_HR_Raster_*` by
+bounding box and date. The natural targets are the Kobuk delta and Hotham Inlet
+during the late-summer peaks identified in `fig03`, where the vector product is
+weakest because SWORD types those reaches 5 and 6.
 
 ## Known limitations
 

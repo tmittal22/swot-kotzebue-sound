@@ -48,22 +48,39 @@ def mpl_setup():
     })
 
 
-def load_reaches(qc=True, ice_free=True):
+def load_reaches(qc=True, ice_free=True, robust=True):
     df = pd.read_parquet(f"{DATA}/swot/reach_timeseries.parquet")
-    return _qc(df, qc, ice_free, "reach_q")
+    return _qc(df, qc, ice_free, "reach_q", robust, "reach_id")
 
 
-def load_nodes(qc=True, ice_free=True):
+def load_nodes(qc=True, ice_free=True, robust=True):
     df = pd.read_parquet(f"{DATA}/swot/node_timeseries.parquet")
-    return _qc(df, qc, ice_free, "node_q")
+    return _qc(df, qc, ice_free, "node_q", robust, "node_id")
 
 
-def _qc(df, qc, ice_free, qcol):
+def _qc(df, qc, ice_free, qcol, robust=True, idcol="reach_id",
+        sigma_k=4.0, floor_m=3.0):
+    """Quality filter.
+
+    `robust` adds a per-feature outlier rejection on top of the product quality
+    flag: a value is dropped if it lies more than `sigma_k` robust standard
+    deviations from that feature's own median.  The floor of `floor_m` is set
+    above the largest real seasonal stage range in the basin (~4.4 m gauged on
+    the Kobuk) so genuine floods survive.  Without this, reach_q<=1 still
+    admits enough spikes to give 13-20 m apparent stage ranges on rivers whose
+    true range is 3-4 m.
+    """
     df = df[df.wse.notna()].copy()
     if qc:
         df = df[df[qcol] <= 1]
     if ice_free:
         df = df[df.ice_clim_f == 0]
+    if robust and len(df):
+        g = df.groupby(idcol).wse
+        med = g.transform("median")
+        mad = g.transform(lambda s: (s - s.median()).abs().median())
+        lim = np.maximum(floor_m, sigma_k * 1.4826 * mad.fillna(0))
+        df = df[(df.wse - med).abs() <= lim]
     df["year"] = df.time.dt.year
     df["doy"] = df.time.dt.dayofyear
     return df.reset_index(drop=True)

@@ -271,6 +271,47 @@ matter, or stratification matter for blooms here, the Kobuk and Noatak are the
 relevant sources and the Selawik is not -- despite the Selawik discharging into
 the same lagoon complex.
 
+## 8b. How the rivers were identified (`fig07`)
+
+The domain box contains **292 SWORD reaches**, and they are not one system.
+`best_outlet` partitions them into **9 independent drainage systems**;
+`main_path_id` splits those into **34 flow paths**. The Koyukuk, a Yukon
+tributary, intrudes into the southeast corner and had to be excluded by
+continent code (812 rather than 813).
+
+Names cannot do the selection: `river_name` is **NODATA for 111 of the 292
+reaches**, including most of the lower Kobuk. Topology can:
+
+1. `best_outlet` -- which outlet the reach drains to.
+2. `main_path_id` + `facc` -- rank the 34 paths by drainage area. Noatak
+   (62,101 km2), Kobuk (31,315) and Selawik (11,616) separate cleanly.
+3. `rch_id_dn` -- draw the actual reach graph; the mainstems are continuous
+   chains fed by 24 confluences.
+4. `dist_out` -- order reaches along each mainstem.
+5. `type` -- decide what is usable. The Kobuk delta shows up here: its lowest
+   84 km are types 5 and 6, which is why the Kobuk profile starts inland rather
+   than at Hotham Inlet.
+
+`docs/flow_path_selection.csv` carries the full ranking with a reason per path.
+One judgement call is visible: path 7000383 (8,262 km2) is a **second** Hotham
+Inlet channel, entirely type 5. One such channel (7001381) was carried and this
+one was not. Both are type 5, so both are excluded from profile analysis
+regardless, and no result depends on the inconsistency.
+
+## 8c. Robustness to the quality-control choice
+
+The robust per-feature outlier rejection developed for nodes was then applied
+at reach level (more than 4 robust sigma from that reach's median, with a 3 m
+floor set above the largest real gauged stage range). Apparent stage ranges of
+13-20 m on some reaches fell to 2.8-7.0 m.
+
+Every headline result is unchanged under the tightened filter:
+
+* Kiana validation: r = 0.980, slope 1.002, residual 20.6 cm -- identical.
+* Selawik peak timing: still 0/3 late, day-of-year 141, 145, 145.
+* Kobuk peak timing: still 2/2 late, day 240 and 250.
+* Chlorophyll: still 0 of 21 lagged correlations survive Bonferroni.
+
 ## 9. What would falsify or sharpen this
 
 * **The out-of-phase result.** Falsified if the Selawik peaks in late summer in
