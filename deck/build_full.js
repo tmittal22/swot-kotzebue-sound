@@ -294,6 +294,23 @@ fig(s,F('fig21c_noatak.png'),0.55,1.4,12.2,4.6);
 explain(s,'Same layout. 323,183 node observations over 694 km — the largest record of the three, and the only one of the three rivers with no gauge anywhere in its history.',
  'The steepest river here at 79 cm/km, and the most clearly tilted banding: anomalies enter at the top of the panel and appear later at lower distances, which is the signature that motivated the celerity attempt.',6.15);
 
+
+/* ============ season zooms ============ */
+s=light('Kobuk, season by season','Seasonal zoom');
+fig(s,F('fig22a_kobuk_seasons.png'),0.55,1.4,12.2,4.6);
+explain(s,'One open-water season per panel on a common day-of-year axis, gridded at 10 km x 3 days. Dashed line marks the day of the seasonal anomaly maximum. The bottom row is the single gauge against its 1977-2022 median, for context.',
+ 'The peak falls on day 251, 241, 245 and 256 in the four years — squarely in the rain window every time, and the anomaly signal builds along the whole river at once rather than propagating up it.',6.15);
+
+s=light('Selawik, season by season','Seasonal zoom');
+fig(s,F('fig22b_selawik_seasons.png'),0.55,1.4,12.2,4.6);
+explain(s,'Same layout, 166 km of river. 35-45% of the space-time grid is filled in each season — the densest coverage of the three relative to river length.',
+ 'Day 145, 140, 145 and 136. Four years, a 9-day spread, always in the nival window. The red freshet band spans the entire river simultaneously, then decays: backwater control seen directly.',6.15);
+
+s=light('Noatak, season by season','Seasonal zoom');
+fig(s,F('fig22c_noatak_seasons.png'),0.55,1.4,12.2,4.6);
+explain(s,'Same layout, 694 km of river and the largest node record of the three. Note this river has no gauge at all — the bottom row shows the Kobuk gauge purely as regional context.',
+ 'Day 240, 237, 239 and 257: rain-window like the Kobuk, but with visible spring structure too. The 2026 panel is truncated on 16 September, which is why its peak sits later and its amplitude lower.',6.15);
+
 /* ============ 14 2-D FIELDS ============ */
 s=light('All three together','Everything at once');
 
