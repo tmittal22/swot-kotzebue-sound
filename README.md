@@ -37,6 +37,7 @@ Method follows two papers:
 | `figs/fig08_swot_swaths.png` | What SWOT actually measured: one overpass in absolute WSE and in anomaly, the 21 ground-track passes, observation density per node. |
 | `figs/fig09_virtual_gauges.png` | Twelve SWOT virtual-gauge stage records, 4 per river. Eight are at locations that have never been gauged. |
 | `figs/fig10_wave_propagation.png` | Wave length, amplitude and seasonality, plus the artefact test that shows why SWOT celerity is not measurable here. |
+| `figs/fig11_optics_vs_biology.png` | Does the discharge-chlorophyll link survive controlling for suspended sediment? Three regions, three different answers. |
 
 ### Data packet
 
@@ -106,9 +107,13 @@ python src/fig01_validation.py         # ... through fig05
 5. **Kobuk discharge does correlate with apparent chlorophyll -- over the full
    record.** Against 4 SWOT summers (n=46) nothing survives Bonferroni; against
    the 2012-2026 gauge record (n=178-217), **12 of 21 do**. Inner sound
-   r = +0.32 at 2 weeks, Hotham Inlet r = -0.31 at 1 week. The opposite signs
-   are equally consistent with plume optics and with productivity, and cannot
-   be separated without nLw(671). No biological claim is made.
+   r = +0.32 at 2 weeks, Hotham Inlet r = -0.31 at 1 week. Controlling for
+   suspended sediment via nLw(671) splits these three ways: the **outer sound**
+   correlation collapses (optics), the **Hotham Inlet** one is untouched and
+   negative (dilution), and the **inner sound** one survives and *strengthens*
+   with lag (0.18 -> 0.28 at 0 -> 2 weeks) while the sediment coupling decays
+   to zero. That lag structure is what a productivity response looks like. The
+   control is partial: nLw(671) does not remove CDOM.
 6. **SWOT flow-wave celerity is not measurable here.** Three estimators, three
    failures. The most convincing one -- peak tracking, 12 coherent Noatak
    events all moving downstream at a median 1.53 m/s -- turned out to track

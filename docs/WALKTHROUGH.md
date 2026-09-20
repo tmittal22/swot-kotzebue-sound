@@ -305,15 +305,57 @@ while exporting sediment- and CDOM-rich water into the sound -- and it is also
 what a genuine productivity response would look like. In Case-2 water the two
 are not separable from chlorophyll alone.
 
-The discriminating measurement is the red-band water-leaving radiance
-nLw(671), which responds to suspended sediment and is nearly blind to
-chlorophyll. If apparent chlorophyll tracks nLw(671), the correlation is
-optical; if it does not, there is a biological signal underneath. That
-download from CoastWatch ERDDAP was still running when this session ended
-(`src/fetch_oceancolor.py` fetches it; the chlorophyll grab took ~25 minutes,
-and these are the same size).
+### Separating optics from biology (`fig11`)
 
-**No biological interpretation is claimed** (PRIORS P8b).
+The discriminating measurement is the red-band water-leaving radiance
+nLw(671): it responds to suspended sediment and is nearly blind to
+chlorophyll. Fetching it needed a chunked request -- ERDDAP returns 502 on a
+15-year pull over this box but serves one year in ~35 s
+(`src/fetch_oceancolor_chunked.py`).
+
+The test is the partial correlation of log Q against log chlorophyll,
+controlling for nLw(671). Twelve tests, Bonferroni alpha = 0.00417, and the
+three regions split three ways.
+
+**Outer sound: optics.** Apparent chlorophyll there tracks sediment hard
+(r = 0.62). The raw discharge correlation of +0.24 collapses to +0.11
+(p = 0.10) once sediment is removed. Nothing survives. This one was the plume.
+
+**Inner sound: survives, and the lag structure is the argument.** The partial
+correlation does not merely survive, it *strengthens* with lag:
+
+| lag (weeks) | r(Q, nLw) sediment | r(Q, chl) raw | r(Q, chl) sediment removed |
+|---|---|---|---|
+| 0 | **0.43** | 0.32 | 0.18 |
+| 1 | 0.34 | 0.33 | 0.24 |
+| 2 | 0.17 | 0.32 | **0.28** |
+| 3 | -0.02 | 0.23 | 0.26 |
+
+The two curves cross. The sediment plume decorrelates from discharge within
+about three weeks, as a diluting, settling tracer should. The chlorophyll
+signal does the opposite: it is weakest at lag 0, when the plume dominates, and
+peaks at two weeks, when the plume signal is nearly gone. Three of the four
+lags survive Bonferroni. A lagged rise that outlives its own forcing tracer is
+what a growth response looks like, not what an optical artefact looks like.
+
+**Hotham Inlet: negative, and not sediment at all.** r(Q, nLw) = -0.03 there,
+so the plume is not driving it, and the partial correlation (-0.28, p = 2e-4)
+is essentially identical to the raw one. High Kobuk discharge goes with lower
+chlorophyll inside the inlet. Flushing of a standing stock is the natural
+reading.
+
+**What this still does not settle.** nLw(671) controls for *sediment*, not for
+*CDOM*, which absorbs in the blue and is a major constituent of Arctic river
+plumes. The lag argument weighs against a pure-CDOM explanation, since CDOM is
+also a conservative plume tracer and ought to decorrelate on the sediment
+timescale, but it does not exclude it. The clean next control is a blue-band
+ratio or aCDOM(443), both available from the same ERDDAP server.
+
+So: **the outer-sound correlation was optics, the inner-sound one is not
+sediment and behaves like a lagged productivity response, and the Hotham Inlet
+one is a dilution signal.** A biological interpretation of the inner sound is
+now the most economical reading, but it rests on an optical control that is
+partial (PRIORS P8b).
 
 ### What can be said
 

@@ -96,10 +96,23 @@ Inlet (inlet r = -0.31 at 1 week; inner sound r = +0.32 at 2 weeks). That
 pattern is what plume optics would produce -- flushing of the turbid inlet plus
 export of sediment- and CDOM-rich water into the sound -- and equally what a
 real productivity response would produce.
-**State: UNRESOLVED.** Separating them needs the red-band radiance nLw(671),
-which responds to suspended sediment and not to chlorophyll. That download was
-still in progress at the end of this session. Until it lands, no biological
-interpretation is claimed.
+**State: PARTIALLY RESOLVED** by the nLw(671) control (`fig11`,
+`docs/chl_optics_partial.csv`). Partial correlation of log Q against log chl
+controlling for nLw(671), 12 tests, Bonferroni alpha = 0.00417:
+
+| region | verdict | evidence |
+|---|---|---|
+| Outer sound | **optics** | r(chl,nLw) = 0.62; raw r = +0.24 collapses to +0.11 (p = 0.10). Nothing survives. |
+| Inner sound | **survives the control** | partial r rises with lag: 0.18, 0.24, 0.28, 0.26 at 0-3 weeks, while Q-nLw coupling decays 0.43, 0.34, 0.17, -0.02. Three of four lags survive. |
+| Hotham Inlet | **not sediment** | r(Q,nLw) = -0.03, so no plume involvement; partial r = -0.28 at lag 0 (p = 2e-4), essentially unchanged from raw. |
+
+5 of 12 survive. **Residual limitation:** nLw(671) controls suspended sediment,
+not CDOM, which absorbs in the blue and is a major Arctic plume constituent.
+The lag structure argues against a pure-CDOM explanation -- CDOM is a
+conservative plume tracer and should decorrelate on the same timescale as
+sediment, yet the chlorophyll signal strengthens at 2-3 weeks when the sediment
+coupling has gone to zero -- but it does not exclude it. A blue-band or
+aCDOM(443) control is the next step.
 
 ## P9 -- Incomplete seasons must be censored, not scored
 **State: ENFORCED.** The 2026 record ends 16 September with the Kobuk stage
